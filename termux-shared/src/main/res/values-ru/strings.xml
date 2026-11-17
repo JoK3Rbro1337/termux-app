@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE resources [
+    <!ENTITY TERMUX_PACKAGE_NAME "com.termux">
+    <!ENTITY TERMUX_APP_NAME "Termux">
+    <!ENTITY TERMUX_API_APP_NAME "Termux:API">
+    <!ENTITY TERMUX_BOOT_APP_NAME "Termux:Boot">
+    <!ENTITY TERMUX_FLOAT_APP_NAME "Termux:Float">
+    <!ENTITY TERMUX_STYLING_APP_NAME "Termux:Styling">
+    <!ENTITY TERMUX_TASKER_APP_NAME "Termux:Tasker">
+    <!ENTITY TERMUX_WIDGET_APP_NAME "Termux:Widget">
+    <!ENTITY TERMUX_PREFIX_DIR_PATH "/data/data/com.termux/files/usr">
+    ]>
+
+<!-- Russian translation of termux-shared/src/main/res/values/strings.xml -->
+<resources>
+
+    <string name="msg_directory_absolute_path">Полный путь к папке %1$s: \"%2$s\"</string>
+
+
+
+    <!-- PackageUtils -->
+    <string name="error_app_not_installed_or_disabled_warning">Приложение %1$s (%2$s) не установлено или отключено.</string>
+    <string name="error_get_package_context_failed_title">Нет доступа к приложению</string>
+    <string name="error_get_package_context_failed_message">Не удалось получить доступ к пакету \"%1$s\".
+        Возможно, приложение не установлено или подписано другим ключом, чем текущее приложение.</string>
+    <string name="error_get_package_context_failed_help_url_message">Подробнее: %1$s</string>
+    <string name="error_get_component_state_failed">Не удалось узнать состояние компонента %1$s/%2$s</string>
+    <string name="error_enable_component_failed">Не удалось включить компонент %1$s/%2$s</string>
+    <string name="error_disable_component_failed">Не удалось отключить компонент %1$s/%2$s</string>
+
+
+
+    <!-- PermissionUtils -->
+    <string name="message_sudo_please_grant_permissions">Пожалуйста, выдайте запрошенные разрешения</string>
+    <string name="error_failed_to_request_permissions">Не удалось запросить разрешения (код запроса %1$d): %2$s</string>
+    <string name="error_attempted_to_check_for_permissions_not_requested">Попытка проверить разрешения, не указанные в манифесте приложения: %1$s</string>
+    <string name="error_attempted_to_ask_for_permissions_not_requested">Попытка запросить разрешения, не указанные в манифесте приложения: %1$s</string>
+    <string name="error_has_not_requested_legacy_external_storage">Пакет \"%1$s\" нацелен на targetSdkVersion %2$d и работает на Android SDK %3$d, но в его манифесте не включён requestLegacyExternalStorage</string>
+    <string name="msg_requires_dump_and_package_usage_stats_permissions">Нужны разрешения `DUMP` и `PACKAGE_USAGE_STATS`</string>
+    <string name="error_display_over_other_apps_permission_not_granted">Чтобы запускаться из фона на Android 10 и новее,
+        %1$s нужно разрешение «Поверх других приложений».
+        Включите его: Настройки Android → Приложения → %1$s → Дополнительно → Поверх других приложений.
+        На разных телефонах название может отличаться, например на Xiaomi это
+        «Отображать всплывающие окна, когда запущено в фоновом режиме». Советы для вашего телефона: https://dontkillmyapp.com</string>
+
+
+
+    <!-- TermuxPluginUtils -->
+    <string name="error_allow_external_apps_ungranted">Для работы %1$s в файле `%2$s` нужно
+        задать параметр `allow-external-apps` равным `true`.</string>
+
+
+
+    <!-- ReportActivity -->
+    <string name="title_report_text">Текст отчёта</string>
+    <string name="msg_report_truncated">**Отчёт обрезан**\n\nОтчёт слишком большой для показа здесь.
+        Выберите «Сохранить в файл» в меню (три точки справа вверху) и откройте его в текстовом редакторе.\n\n##\n\n</string>
+
+
+
+    <!-- ShareUtils -->
+    <string name="title_share_with">Поделиться через</string>
+    <string name="title_open_url_with">Открыть ссылку в</string>
+    <string name="msg_storage_permission_not_granted">Нет разрешения на доступ к памяти.</string>
+    <string name="msg_file_saved_successfully">Файл %1$s сохранён: \"%2$s\"</string>
+
+
+
+    <!-- Shell -->
+    <string name="error_sending_sigkill_to_process">Процесс принудительно завершается (SIGKILL) по запросу пользователя или потому, что Android закрывает службу</string>
+    <string name="error_executable_unset">Для команды оболочки не задан исполняемый файл \"%1$s\"</string>
+    <string name="error_execution_cancelled">Выполнение отменено, потому что служба закрывается</string>
+    <string name="error_failed_to_execute_termux_session_command">Не удалось выполнить команду сессии termux \"%1$s\"</string>
+    <string name="error_failed_to_execute_app_shell_command">Не удалось выполнить команду оболочки приложения \"%1$s\"</string>
+    <string name="error_exception_received_while_executing_termux_session_command">Ошибка при выполнении команды сессии termux \"%1$s\".\nОшибка: %2$s</string>
+    <string name="error_exception_received_while_executing_app_shell_command">Ошибка при выполнении команды оболочки приложения \"%1$s\".\nОшибка: %2$s</string>
+
+
+
+    <!-- TermuxUtils -->
+    <string name="msg_report_issue">
+        Если хотите сообщить об этой проблеме, скопируйте текст отчёта через меню (три точки справа вверху) и создайте
+        обращение по одной из ссылок ниже. Обращения принимаются на английском языке.
+        \n\nЕсли это отчёт о сбое Termux, опишите, что вы делали перед сбоем и как его повторить, если это возможно.
+        \n\nНа GitHub создавайте обращение в том репозитории, к которому относится отчёт.
+        Обращения и письма со **скриншотами (частями экрана)** вместо скопированного текста или файла отчёта
+        **скорее всего будут автоматически закрыты/удалены**. Можете убрать из отчёта данные об устройстве,
+        которые считаете личными или не относящимися к проблеме.
+        \n\nМы не помогаем с инструментами и скриптами для взлома. Вопросы о них по почте,
+        на GitHub или на других официальных форумах termux **скорее всего будут закрыты/удалены**, а автор может
+        получить **временный или постоянный** бан. Подробнее: %1$s/wiki/Hacking</string>
+
+    <string name="msg_termux_app_required_by_app">Для выполнения команд termux приложению %1$s нужно приложение &TERMUX_APP_NAME;.</string>
+    <string name="error_termux_app_package_context_not_accessible">Нет доступа к приложению &TERMUX_APP_NAME; (package context).</string>
+    <string name="error_termux_prefix_dir_path_not_accessible">Приложению %1$s недоступна папка $PREFIX приложения &TERMUX_APP_NAME;.
+        Возможно, вы не установили или не настроили &TERMUX_APP_NAME;, или
+        &TERMUX_APP_NAME; и %1$s подписаны разными ключами, потому что установлены из разных источников.
+        Также возможно, что папки $PREFIX \"&TERMUX_PREFIX_DIR_PATH;\" нет или у неё нет прав на чтение,
+        запись и выполнение.</string>
+
+
+
+    <!-- Miscellaneous -->
+    <string name="action_yes">Да</string>
+    <string name="action_no">Нет</string>
+    <string name="action_copy">Копировать</string>
+    <string name="action_share">Поделиться</string>
+    <string name="action_cancel">Отмена</string>
+    <string name="action_save_to_file">Сохранить в файл</string>
+
+    <string name="msg_storage_permission_granted_on_request">Доступ к памяти разрешён</string>
+    <string name="msg_storage_permission_not_granted_on_request">Доступ к памяти не разрешён</string>
+
+
+
+    <!-- Launcher Icons -->
+    <string name="action_enable_launcher_icon">Показать значок на рабочем столе</string>
+    <string name="action_disable_launcher_icon">Скрыть значок с рабочего стола</string>
+    <string name="msg_enabling_launcher_icon">Значок %1$s появится на рабочем столе</string>
+    <string name="msg_disabling_launcher_icon">Значок %1$s будет скрыт с рабочего стола</string>
+    <string name="setting_launcher_icon_title">Значок на рабочем столе</string>
+    <string name="setting_launcher_icon_enabled_off">Значок будет скрыт.</string>
+    <string name="setting_launcher_icon_enabled_on">Значок будет показан. (По умолчанию)</string>
+
+
+
+    <!-- Log Level -->
+    <string name="log_level_title">Уровень журнала</string>
+    <string name="log_level_off">Выключен</string>
+    <string name="log_level_normal">Обычный</string>
+    <string name="log_level_debug">Отладка</string>
+    <string name="log_level_verbose">Подробный</string>
+    <string name="log_level_unknown">*Неизвестно*</string>
+    <string name="log_level_value">Уровень журнала logcat: \"%1$s\"</string>
+
+</resources>

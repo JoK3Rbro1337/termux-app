@@ -112,6 +112,17 @@ public class TermuxAppSharedPreferences extends AppSharedPreferences {
 
 
 
+    /** Get the raw quick commands text (one command per line). Empty value means the default list. */
+    public String getTerminalQuickCommands() {
+        return SharedPreferenceUtils.getString(mSharedPreferences, TERMUX_APP.KEY_TERMINAL_QUICK_COMMANDS, TERMUX_APP.DEFAULT_VALUE_TERMINAL_QUICK_COMMANDS, true);
+    }
+
+    public void setTerminalQuickCommands(String value) {
+        SharedPreferenceUtils.setString(mSharedPreferences, TERMUX_APP.KEY_TERMINAL_QUICK_COMMANDS, value, false);
+    }
+
+
+
     public boolean shouldKeepScreenOn() {
         return SharedPreferenceUtils.getBoolean(mSharedPreferences, TERMUX_APP.KEY_KEEP_SCREEN_ON, TERMUX_APP.DEFAULT_VALUE_KEEP_SCREEN_ON);
     }

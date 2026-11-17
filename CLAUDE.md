@@ -15,3 +15,11 @@ Build/delivery:
 
 Localization:
 - Russian strings live in `values-ru/` of `app`, `termux-shared`, `terminal-view`. When adding a user-visible string, add it to both `values/` and `values-ru/` — never hardcode UI text in Java. Use `<plurals>` for counts (Russian needs one/few/many).
+
+Terminal toolbar (stage 2):
+- Pages: `TerminalToolbarViewPager.PAGE_EXTRA_KEYS` (0) → `PAGE_QUICK_COMMANDS` (1, `TermuxQuickCommands`, list from the `terminal_quick_commands` preference, editable in Settings → Terminal I/O) → `PAGE_TEXT_INPUT` (2). All three stay alive (`setOffscreenPageLimit(2)`).
+- Default extra keys (`TermuxPropertyConstants.DEFAULT_IVALUE_EXTRA_KEYS`) are tuned for Claude Code: ESC, Shift+Tab (`{macro: 'SHIFT TAB'}` → `ESC [ Z`), Ctrl+C. A user's own `extra-keys` in `~/.termux/termux.properties` still overrides them.
+- Quick commands send the text, then Enter ~60ms later, so Claude Code's input doesn't treat it as one pasted chunk.
+
+Roadmap: 0 CI ✓ → 1 Russian UI ✓ → 2 button panel → 3 background-kill protection → 4 session tabs → 5 themes/fonts → 6 one-tap Claude Code installer.
+- **Stage 6 decision:** proot-distro Ubuntu is broken on the owner's phone (glibc `allocatestack.c advise_stack_range` fatal error, Rust "thread handle already set"; `PROOT_NO_SECCOMP=1` doesn't help). The installer must install Claude Code **natively via glibc-runner + patchelf** using the official binary from downloads.claude.ai with checksum verification — **not** proot-distro. The owner already has a working setup made with the ferrumclaudepilgrim/claude-code-android installer; the in-app installer must not break an existing install.

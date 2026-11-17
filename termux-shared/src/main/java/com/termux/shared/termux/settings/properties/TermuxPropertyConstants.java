@@ -326,7 +326,16 @@ public final class TermuxPropertyConstants {
     /** Defines the key for extra keys */
     public static final String KEY_EXTRA_KEYS =  "extra-keys"; // Default: "extra-keys"
     //public static final String DEFAULT_IVALUE_EXTRA_KEYS = "[[ESC, TAB, CTRL, ALT, {key: '-', popup: '|'}, DOWN, UP]]"; // Single row
-    public static final String DEFAULT_IVALUE_EXTRA_KEYS = "[['ESC','/',{key: '-', popup: '|'},'HOME','UP','END','PGUP'], ['TAB','CTRL','ALT','LEFT','DOWN','RIGHT','PGDN']]"; // Double row
+    //public static final String DEFAULT_IVALUE_EXTRA_KEYS = "[['ESC','/',{key: '-', popup: '|'},'HOME','UP','END','PGUP'], ['TAB','CTRL','ALT','LEFT','DOWN','RIGHT','PGDN']]"; // Double row (upstream)
+    /**
+     * Double row tuned for Claude Code on a phone: Esc, Shift+Tab (mode switch) and Ctrl+C are on
+     * the first row, arrows form an inverted T on the right. Swipe up on a key for its popup:
+     * ^C -> ^D, / -> @, HOME -> PGUP, END -> PGDN, - -> |.
+     */
+    public static final String DEFAULT_IVALUE_EXTRA_KEYS = "[" +
+        "['ESC', {macro: 'SHIFT TAB', display: '⇧TAB'}, {macro: 'CTRL c', display: '^C', popup: {macro: 'CTRL d', display: '^D'}}, {key: '/', popup: '@'}, {key: 'HOME', popup: 'PGUP'}, 'UP', {key: 'END', popup: 'PGDN'}], " +
+        "['TAB', 'CTRL', 'ALT', {key: '-', popup: '|'}, 'LEFT', 'DOWN', 'RIGHT']" +
+        "]";
 
     /** Defines the key for extra keys style */
     public static final String KEY_EXTRA_KEYS_STYLE =  "extra-keys-style"; // Default: "extra-keys-style"

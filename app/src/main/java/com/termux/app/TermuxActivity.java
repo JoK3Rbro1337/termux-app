@@ -31,6 +31,7 @@ import com.termux.app.api.file.FileReceiverActivity;
 import com.termux.app.terminal.TermuxActivityRootView;
 import com.termux.app.terminal.TermuxTerminalSessionActivityClient;
 import com.termux.app.terminal.io.TermuxTerminalExtraKeys;
+import com.termux.app.terminal.io.TermuxQuickCommands;
 import com.termux.shared.activities.ReportActivity;
 import com.termux.shared.activity.ActivityUtils;
 import com.termux.shared.activity.media.AppCompatActivityUtils;
@@ -132,6 +133,12 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
      * The client for the {@link #mExtraKeysView}.
      */
     TermuxTerminalExtraKeys mTermuxTerminalExtraKeys;
+
+    /**
+     * The quick commands page of the terminal toolbar and its client.
+     */
+    ExtraKeysView mQuickCommandsView;
+    TermuxQuickCommands mTermuxQuickCommands;
 
     /**
      * The termux sessions list controller.
@@ -314,6 +321,9 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
 
         if (mTermuxTerminalViewClient != null)
             mTermuxTerminalViewClient.onResume();
+
+        // The quick commands may have been edited in settings
+        reloadQuickCommands();
 
         // Check if a crash happened on last run of the app or if a plugin crashed and show a
         // notification with the crash details if it did
@@ -510,6 +520,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
     private void setTerminalToolbarView(Bundle savedInstanceState) {
         mTermuxTerminalExtraKeys = new TermuxTerminalExtraKeys(this, mTerminalView,
             mTermuxTerminalViewClient, mTermuxTerminalSessionActivityClient);
+        mTermuxQuickCommands = new TermuxQuickCommands(this);
 
         final ViewPager terminalToolbarViewPager = getTerminalToolbarViewPager();
         if (mPreferences.shouldShowTerminalToolbar()) terminalToolbarViewPager.setVisibility(View.VISIBLE);
@@ -523,6 +534,9 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         if (savedInstanceState != null)
             savedTextInput = savedInstanceState.getString(ARG_TERMINAL_TOOLBAR_TEXT_INPUT);
 
+        // Keep all toolbar pages alive so that the extra keys view (and its CTRL/ALT state) is
+        // never destroyed while the text input page is shown
+        terminalToolbarViewPager.setOffscreenPageLimit(2);
         terminalToolbarViewPager.setAdapter(new TerminalToolbarViewPager.PageAdapter(this, savedTextInput));
         terminalToolbarViewPager.addOnPageChangeListener(new TerminalToolbarViewPager.OnPageChangeListener(this, terminalToolbarViewPager));
     }
@@ -833,6 +847,27 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         mExtraKeysView = extraKeysView;
     }
 
+    public TermuxQuickCommands getTermuxQuickCommands() {
+        return mTermuxQuickCommands;
+    }
+
+    public void setQuickCommandsView(ExtraKeysView quickCommandsView) {
+        mQuickCommandsView = quickCommandsView;
+    }
+
+    /** Reload the quick commands page, e.g. after the list was edited in settings. */
+    public void reloadQuickCommands() {
+        if (mQuickCommandsView != null && mTermuxQuickCommands != null)
+            mQuickCommandsView.reload(mTermuxQuickCommands.buildExtraKeysInfo(getTerminalToolbarRowCount()),
+                mTerminalToolbarDefaultHeight);
+    }
+
+    /** Number of rows of the extra keys page, which defines the toolbar height. */
+    public int getTerminalToolbarRowCount() {
+        if (mTermuxTerminalExtraKeys == null || mTermuxTerminalExtraKeys.getExtraKeysInfo() == null) return 1;
+        return Math.max(1, mTermuxTerminalExtraKeys.getExtraKeysInfo().getMatrix().length);
+    }
+
     public DrawerLayout getDrawer() {
         return (DrawerLayout) findViewById(R.id.drawer_layout);
     }
@@ -847,11 +882,11 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
     }
 
     public boolean isTerminalViewSelected() {
-        return getTerminalToolbarViewPager().getCurrentItem() == 0;
+        return getTerminalToolbarViewPager().getCurrentItem() != TerminalToolbarViewPager.PAGE_TEXT_INPUT;
     }
 
     public boolean isTerminalToolbarTextInputViewSelected() {
-        return getTerminalToolbarViewPager().getCurrentItem() == 1;
+        return getTerminalToolbarViewPager().getCurrentItem() == TerminalToolbarViewPager.PAGE_TEXT_INPUT;
     }
 
 
@@ -973,6 +1008,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
                 mExtraKeysView.setButtonTextAllCaps(mProperties.shouldExtraKeysTextBeAllCaps());
                 mExtraKeysView.reload(mTermuxTerminalExtraKeys.getExtraKeysInfo(), mTerminalToolbarDefaultHeight);
             }
+            reloadQuickCommands();
 
             // Update NightMode.APP_NIGHT_MODE
             TermuxThemeUtils.setAppNightMode(mProperties.getNightMode());

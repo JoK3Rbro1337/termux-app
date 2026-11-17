@@ -18,4 +18,16 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory
+        app:key="toolbar"
+        app:title="@string/termux_toolbar_header">
+
+        <EditTextPreference
+            app:key="terminal_quick_commands"
+            app:title="@string/termux_quick_commands_title"
+            app:dialogTitle="@string/termux_quick_commands_title"
+            app:dialogMessage="@string/termux_quick_commands_dialog_message" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>

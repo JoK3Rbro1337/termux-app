@@ -16,6 +16,13 @@ import com.termux.terminal.TerminalSession;
 
 public class TerminalToolbarViewPager {
 
+    /** Page with the extra keys (ESC, CTRL, arrows...). */
+    public static final int PAGE_EXTRA_KEYS = 0;
+    /** Page with the user's quick commands (swipe the extra keys left). */
+    public static final int PAGE_QUICK_COMMANDS = 1;
+    /** Page with the text input field (swipe left once more). */
+    public static final int PAGE_TEXT_INPUT = 2;
+
     public static class PageAdapter extends PagerAdapter {
 
         final TermuxActivity mActivity;
@@ -28,7 +35,7 @@ public class TerminalToolbarViewPager {
 
         @Override
         public int getCount() {
-            return 2;
+            return 3;
         }
 
         @Override
@@ -41,7 +48,7 @@ public class TerminalToolbarViewPager {
         public Object instantiateItem(@NonNull ViewGroup collection, int position) {
             LayoutInflater inflater = LayoutInflater.from(mActivity);
             View layout;
-            if (position == 0) {
+            if (position == PAGE_EXTRA_KEYS) {
                 layout = inflater.inflate(R.layout.view_terminal_toolbar_extra_keys, collection, false);
                 ExtraKeysView extraKeysView = (ExtraKeysView) layout;
                 extraKeysView.setExtraKeysViewClient(mActivity.getTermuxTerminalExtraKeys());
@@ -55,6 +62,11 @@ public class TerminalToolbarViewPager {
                     FullScreenWorkAround.apply(mActivity);
                 }
 
+            } else if (position == PAGE_QUICK_COMMANDS) {
+                layout = inflater.inflate(R.layout.view_terminal_toolbar_quick_commands, collection, false);
+                ExtraKeysView quickCommandsView = (ExtraKeysView) layout;
+                mActivity.setQuickCommandsView(quickCommandsView);
+                mActivity.getTermuxQuickCommands().setupView(quickCommandsView, mActivity.getTerminalToolbarRowCount());
             } else {
                 layout = inflater.inflate(R.layout.view_terminal_toolbar_text_input, collection, false);
                 final EditText editText = layout.findViewById(R.id.terminal_toolbar_text_input);
@@ -104,7 +116,7 @@ public class TerminalToolbarViewPager {
 
         @Override
         public void onPageSelected(int position) {
-            if (position == 0) {
+            if (position != PAGE_TEXT_INPUT) {
                 mActivity.getTerminalView().requestFocus();
             } else {
                 final EditText editText = mTerminalToolbarViewPager.findViewById(R.id.terminal_toolbar_text_input);

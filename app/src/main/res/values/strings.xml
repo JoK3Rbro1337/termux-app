@@ -172,7 +172,7 @@
 
         <!-- Terminal IO Preferences -->
         <string name="termux_terminal_io_preferences_title">Terminal I/O</string>
-        <string name="termux_terminal_io_preferences_summary">Preferences for terminal I/O</string>
+        <string name="termux_terminal_io_preferences_summary">Keyboard and quick commands</string>
 
             <!-- Keyboard Category -->
             <string name="termux_keyboard_header">Keyboard</string>
@@ -203,6 +203,12 @@
                 <string name="termux_terminal_view_terminal_margin_adjustment_on">Terminal margin adjustment will be enabled.
                     It should be enabled to try to fix the issue where soft keyboard covers part of extra keys/terminal view.
                     If it causes screen flickering on your devices, then disable it. (Default)</string>
+
+            <!-- Toolbar Category -->
+            <string name="termux_toolbar_header">Button panel</string>
+            <string name="termux_quick_commands_title">Quick commands</string>
+            <string name="termux_quick_commands_dialog_message">One command per line. Tapping a button types the command and presses Enter. Clear the field to restore the default list.</string>
+            <string name="termux_quick_commands_summary">Swipe the button panel left to see them: %1$s</string>
 
 
 

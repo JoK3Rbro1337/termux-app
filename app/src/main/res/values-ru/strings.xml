@@ -173,7 +173,7 @@
 
         <!-- Terminal IO Preferences -->
         <string name="termux_terminal_io_preferences_title">Ввод и вывод</string>
-        <string name="termux_terminal_io_preferences_summary">Настройки клавиатуры терминала</string>
+        <string name="termux_terminal_io_preferences_summary">Клавиатура и быстрые команды</string>
 
             <!-- Keyboard Category -->
             <string name="termux_keyboard_header">Клавиатура</string>
@@ -204,6 +204,12 @@
                 <string name="termux_terminal_view_terminal_margin_adjustment_on">Подстройка отступов включена.
                     Помогает, если экранная клавиатура закрывает часть панели кнопок или терминала.
                     Если экран начал мерцать — выключите. (По умолчанию)</string>
+
+            <!-- Toolbar Category -->
+            <string name="termux_toolbar_header">Панель кнопок</string>
+            <string name="termux_quick_commands_title">Быстрые команды</string>
+            <string name="termux_quick_commands_dialog_message">По одной команде на строку. Кнопка вводит команду и сама нажимает Enter. Очистите поле, чтобы вернуть список по умолчанию.</string>
+            <string name="termux_quick_commands_summary">Свайпните панель кнопок влево, чтобы их увидеть: %1$s</string>
 
 
 

@@ -119,6 +119,16 @@ public final class TermuxPreferenceConstants {
 
 
         /**
+         * Defines the key for the quick commands shown on the second page of the terminal toolbar
+         * (swipe the extra keys left). One command per line; tapping a button types the command
+         * and presses Enter.
+         */
+        public static final String KEY_TERMINAL_QUICK_COMMANDS = "terminal_quick_commands";
+        public static final String DEFAULT_VALUE_TERMINAL_QUICK_COMMANDS =
+            "claude\nclaude -c\n/compact\n/clear\nls\ncd ..\ncd ~\nclear";
+
+
+        /**
          * Defines the key for whether to always keep screen on.
          */
         public static final String KEY_KEEP_SCREEN_ON = "screen_always_on";
